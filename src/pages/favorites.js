@@ -1,21 +1,21 @@
-import { Empty, Button } from "antd";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+
+import FavoritesContext from "../store/favorites-context";
+import ListItem from "../components/ListItem";
+import Search from "../components/Search";
 
 function FavoritesPage() {
+  const favoritesCtx = useContext(FavoritesContext);
+  const favorites = favoritesCtx.favorites;
+
   return (
-    <Empty
-      image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-      imageStyle={{
-        height: 60,
-      }}
-      description={
-        <span>
-          No favorites yet?
-        </span>
-      }
-    >
-      <Button type="primary"><Link to= '/'>Start now!</Link></Button>
-    </Empty>
+    <section>
+      {favorites.map((item, index) => {
+        return <ListItem key={index} item={item} />;
+      })}
+    </section>
+
+
   );
 }
 
