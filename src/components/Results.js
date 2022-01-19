@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import ListItem from "../components/ListItem";
 import Search from "../components/Search";
-import useStorage from "../store/useStorage";
+import useStorage from "../utils/useStorage";
 
 function Results({ data }) {
   const location = useLocation().pathname;
