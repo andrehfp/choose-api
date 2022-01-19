@@ -5,14 +5,17 @@ import "antd/dist/antd.css";
 import { ConfigProvider } from "antd";
 import { BrowserRouter } from "react-router-dom";
 import { FavoritesContextProvider } from "./store/favorites-context";
+import { UserContextProvider } from "./store/user-context";
 
 ReactDOM.render(
   <ConfigProvider>
-    <FavoritesContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </FavoritesContextProvider>
+    <UserContextProvider>
+      <FavoritesContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </FavoritesContextProvider>
+    </UserContextProvider>
   </ConfigProvider>,
   document.getElementById("root")
 );
