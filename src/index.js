@@ -7,14 +7,12 @@ import { BrowserRouter } from "react-router-dom";
 import { FavoritesContextProvider } from "./store/favorites-context";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ConfigProvider>
-      <FavoritesContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </FavoritesContextProvider>
-    </ConfigProvider>
-  </React.StrictMode>,
+  <ConfigProvider>
+    <FavoritesContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </FavoritesContextProvider>
+  </ConfigProvider>,
   document.getElementById("root")
 );

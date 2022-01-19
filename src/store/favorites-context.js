@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const FavoritesContext = createContext({
   favorites: [],
@@ -8,8 +8,15 @@ const FavoritesContext = createContext({
   itemIsFavorite: (item) => {},
 });
 
-export function FavoritesContextProvider(props) {
-  const [userFavorites, setUserFavorites] = useState([]);
+export function FavoritesContextProvider({children}) {
+  const [userFavorites, setUserFavorites] = useState(()=> {
+    const localData = localStorage.getItem('userFavorites');
+    return localData ? JSON.parse(localData) : []
+  });
+
+  useEffect(()=> {
+   localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
+  },[userFavorites])
 
   function addFavoritesHandler(item) {
     setUserFavorites((prev) => {
@@ -41,7 +48,7 @@ export function FavoritesContextProvider(props) {
 
   return (
     <FavoritesContext.Provider value={context}>
-      {props.children}
+      {children}
     </FavoritesContext.Provider>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Content } from "antd/lib/layout/layout";
 
-import ResultsPage from "./pages/results";
+import ResultsPage from "./pages/resultspage";
 import FavoritesPage from "./pages/favorites";
 import MainNavigation from "./components/MainNavigation";
 

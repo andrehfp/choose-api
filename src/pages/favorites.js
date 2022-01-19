@@ -1,21 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 
 import FavoritesContext from "../store/favorites-context";
-import ListItem from "../components/ListItem";
-import Search from "../components/Search";
+import Results from "../components/Results";
 
 function FavoritesPage() {
   const favoritesCtx = useContext(FavoritesContext);
   const favorites = favoritesCtx.favorites;
 
+  useEffect(()=> {},[])
+
   return (
     <section>
-      {favorites.map((item, index) => {
-        return <ListItem key={index} item={item} />;
-      })}
+      <h2>My Favorites</h2>
+      <Results data={favorites}/>
     </section>
-
-
   );
 }
 
