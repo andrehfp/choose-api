@@ -17,7 +17,7 @@ function FavoritesPage() {
     content = <Results data={favorites}/>
   }
   else {
-    content = <p>Log In to see your favorites!</p>
+    content = <h1>Log In to see your favorites!</h1>
   }
 
   return (

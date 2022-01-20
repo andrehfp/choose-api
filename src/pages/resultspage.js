@@ -6,6 +6,7 @@ import Results from "../components/Results";
 const { Meta } = Card;
 
 function ResultsPage({ url }) {
+
   const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState([]);
 

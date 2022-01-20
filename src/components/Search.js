@@ -8,7 +8,7 @@ function SearchComponent({ content, onSearch, onOrderBy, url}) {
   const [field, setField] = useState();
   const [searchText, setSearch] = useState();
   const [options, setOptions] = useState([]);
-  const [orderBy, setOrderBy] = useState([]);
+  const [orderBy, setOrderBy] = useState();
 
   useEffect(() => {
     content.forEach((item) => {
@@ -76,7 +76,7 @@ function SearchComponent({ content, onSearch, onOrderBy, url}) {
         </Select>
       </Col>
       <Col xs={4} md={4}>
-        <Select onChange={onOrderByHandler} style={{ width: "100%" }}>
+        <Select disabled={orderBy?false:true} onChange={onOrderByHandler} style={{ width: "100%" }}>
           <Option value="asc">Asc</Option>
           <Option value="desc">Desc</Option>
         </Select>

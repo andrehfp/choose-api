@@ -1,16 +1,18 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { Pagination, Empty, Divider } from "antd";
 import { useLocation } from "react-router-dom";
 
 import ListItem from "../components/ListItem";
 import Search from "../components/Search";
 import useStorage from "../utils/useStorage";
+import UserContext from "../store/user-context";
 
 function Results({ data }) {
   const location = useLocation().pathname;
-  const [search, setSearch] = useStorage(`${location}search`, "");
+  const userCtx = useContext(UserContext);
+  const [search, setSearch] = useStorage(`${location}${userCtx.userHash}search`, "");
   const [searchField, setSearchField] = useStorage(
-    `${location}searchField`,
+    `${location}${userCtx.userHash}searchField`,
     ""
   );
   const [content, setContent] = useState([]);
@@ -18,7 +20,7 @@ function Results({ data }) {
  
   const doSearch = useCallback(
     (search, searchField) => {
-      if (search === "" || searchField === "") {
+      if (search === "" || search === undefined) {
         setResults(content);
         setTotal(content.length);
         return;
@@ -48,8 +50,7 @@ function Results({ data }) {
 
   /* Pagination */
   const [total, setTotal] = useState("");
-  //const [page, setPage] = useState(1);
-  const [page, setPage] = useStorage(`${location}page`, 1);
+  const [page, setPage] = useStorage(`${location}${userCtx.userHash}page`, 1);
   const [postPerPage, setPostPerPage] = useState(10);
   /**************/
 
@@ -110,6 +111,7 @@ function Results({ data }) {
       ) : (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}
+      <Divider />
 
       <Pagination
         onChange={(value) => setPage(value)}

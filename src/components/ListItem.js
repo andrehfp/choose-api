@@ -1,9 +1,8 @@
-import { Card, Typography, Button } from "antd";
+import { Card, Button } from "antd";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
 import { useContext } from "react";
 import FavoritesContext from "../store/favorites-context";
 import UserContext from "../store/user-context";
-const { Title } = Typography;
 
 function ListItem({ item }) {
   const favoritesCtx = useContext(FavoritesContext);
@@ -20,7 +19,6 @@ function ListItem({ item }) {
 
   return (
     <Card
-      title={<Title level={4}>{item.title}</Title>}
       style={{ width: 600, marginTop: 16 }}
       extra={
         <Button disabled={userCtx.loginStatus?false:true} type="primary" shape="circle" onClick={toggleFavoritesHandler}>
