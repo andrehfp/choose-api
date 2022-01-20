@@ -1,12 +1,30 @@
-import { Card, Typography } from "antd";
-
-const { Title } = Typography;
+import { Card, Button } from "antd";
+import { StarOutlined, StarFilled } from "@ant-design/icons";
+import { useContext } from "react";
+import FavoritesContext from "../store/favorites-context";
+import UserContext from "../store/user-context";
 
 function ListItem({ item }) {
+  const favoritesCtx = useContext(FavoritesContext);
+  const userCtx = useContext(UserContext);
+  const itemIsFavorite = favoritesCtx.itemIsFavorite(item);
+
+  function toggleFavoritesHandler() {
+    if (itemIsFavorite) {
+      favoritesCtx.removeFavorite(item);
+    } else {
+      favoritesCtx.addFavorite(item);
+    }
+  }
+
   return (
     <Card
-      title={<Title level={4}>{item.title}</Title>}
       style={{ width: 600, marginTop: 16 }}
+      extra={
+        <Button disabled={userCtx.loginStatus?false:true} type="primary" shape="circle" onClick={toggleFavoritesHandler}>
+          {itemIsFavorite ? <StarFilled /> : <StarOutlined />}
+        </Button>
+      }
     >
       {Object.keys(item).map((e, i) => {
         return (

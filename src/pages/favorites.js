@@ -1,21 +1,30 @@
-import { Empty, Button } from "antd";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+
+import FavoritesContext from "../store/favorites-context";
+import UserContext from "../store/user-context";
+import Results from "../components/Results";
 
 function FavoritesPage() {
+  const favoritesCtx = useContext(FavoritesContext);
+  const userCtx = useContext(UserContext);
+  const favorites = favoritesCtx.favorites;
+
+  useEffect(()=> {},[])
+
+  let content;
+
+  if (userCtx.loginStatus){
+    content = <Results data={favorites}/>
+  }
+  else {
+    content = <h1>Log In to see your favorites!</h1>
+  }
+
   return (
-    <Empty
-      image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-      imageStyle={{
-        height: 60,
-      }}
-      description={
-        <span>
-          No favorites yet?
-        </span>
-      }
-    >
-      <Button type="primary"><Link to= '/'>Start now!</Link></Button>
-    </Empty>
+    <section>
+      <h2>My Favorites</h2>
+      {content}
+    </section>
   );
 }
 
