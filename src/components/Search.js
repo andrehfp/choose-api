@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const { Option } = Select;
 const { Search } = Input;
 
-function SearchComponent({ content, onSearch, onOrderBy, url}) {
+function SearchComponent({ content, onSearch, onOrderBy}) {
   const [field, setField] = useState();
   const [searchText, setSearch] = useState();
   const [options, setOptions] = useState([]);
@@ -43,7 +43,7 @@ function SearchComponent({ content, onSearch, onOrderBy, url}) {
   return (
     <Row gutter={8}>
       <Col xs={4} md={4}>
-        <Select onChange={selectChangeHandler} style={{ width: "100%" }}>
+        <Select role='typeSearch' onChange={selectChangeHandler} style={{ width: "100%" }}>
           {options.map((item) => {
             return (
               <Option key={item} value={item}>
@@ -56,16 +56,17 @@ function SearchComponent({ content, onSearch, onOrderBy, url}) {
       <Col xs={4} sm={4} md={4}>
         {field ? (
           <Search
+          role={'search'}
             placeholder="Search Here"
             onSearch={onSearchHandler}
             onChange={onChange}
           />
         ) : (
-          <Search placeholder="Choose a field" disabled />
+          <Search role={'searchDisabled'} placeholder="Choose a field" disabled />
         )}
       </Col>
       <Col xs={4} md={4}>
-        <Select onChange={selectOrderByChange} style={{ width: "100%" }}>
+        <Select role='orderByField' onChange={selectOrderByChange} style={{ width: "100%" }}>
           {options.map((item) => {
             return (
               <Option key={item} value={item}>
@@ -76,7 +77,7 @@ function SearchComponent({ content, onSearch, onOrderBy, url}) {
         </Select>
       </Col>
       <Col xs={4} md={4}>
-        <Select disabled={orderBy?false:true} onChange={onOrderByHandler} style={{ width: "100%" }}>
+        <Select role='orderByValue' disabled={orderBy?false:true} onChange={onOrderByHandler} style={{ width: "100%" }}>
           <Option value="asc">Asc</Option>
           <Option value="desc">Desc</Option>
         </Select>
